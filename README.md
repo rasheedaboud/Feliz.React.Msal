@@ -53,7 +53,9 @@ A wrapper around Microsofts MSAL library for react.
 #### Protecting sections of site
 
 Use Authenticated/Unauthenticated template to show or hide sections of ui
-    ```fs
+
+
+    
           AuthenticatedTemplate.create [
               AuthenticatedTemplate.children [
               ]
@@ -63,7 +65,8 @@ Use Authenticated/Unauthenticated template to show or hide sections of ui
               UnauthenticatedTemplate.children [
               ]
           ]
-    ```
+          
+
 
 Or use useIsAuthenticated() hook.
 
