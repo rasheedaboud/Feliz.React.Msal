@@ -8,6 +8,25 @@ open Fable.Core.JsInterop
 open Fable.React
 open Feliz
 
+[<AutoOpen>]
+module Config = 
+    type Auth = {
+        clientId:string
+        authority:string
+        knownAuthorities:string[]
+        redirectUri:string
+        postLogoutRedirectUri:string
+    }
+    type Cache = {
+        cacheLocation:string; 
+        storeAuthStateInCookie:bool
+    }
+
+    /// //////////////////////////////////////
+    type MsalConfig ={
+        auth:Auth;
+        cache:Cache}
+
 module Account = 
 
     
@@ -206,7 +225,7 @@ module Msal =
         abstract member getActiveAccount:unit -> AccountInfo option
 
     [<Import("PublicClientApplication", from="@azure/msal-browser")>]
-    type PublicClientApplication (config:obj) =
+    type PublicClientApplication (config:MsalConfig) =
         interface IPublicClientApplication with
             member _.loginRedirect(request:Requests.RedirectRequest) = jsNative  
             member _.loginPopup(request:Requests.PopupRequest) = jsNative
@@ -264,40 +283,6 @@ module Msal =
       static member inline create props = Interop.reactApi.createElement (unauthenticatedTemplate, createObj !!props)
 
 
-
-
-
-    //////////////////////////////////////////
-    /// CHANGE ME
-    /// MORE INFO https://docs.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-tenant
-    /// There are a ton of possible options.
-    /// Sugest parameterise this into config file that can be loaded
-
-    type Auth = {
-        clientId:string
-        authority:string
-        knownAuthorities:string[]
-        redirectUri:string
-        postLogoutRedirectUri:string
-    }
-    type Cache = {
-        cacheLocation:string; 
-        storeAuthStateInCookie:bool
-    }
-
-    /// //////////////////////////////////////
-    type MsalConfig ={
-        auth:Auth;
-        cache:Cache}
-
-
-    let msalConfig authconfig cacheConfig={
-        auth=authconfig;
-        cache=cacheConfig
-      }
-
-
-
     ///Send request to server to reset user password.
     let forgotPasswordRequest(config:MsalConfig):Requests.RedirectRequest = {
         account = None
@@ -318,7 +303,7 @@ module Msal =
       error.Contains("AADB2C90118")
 
 
-    let client = PublicClientApplication(msalConfig) :> IPublicClientApplication
+    let createClient config = new PublicClientApplication(config:MsalConfig) :> IPublicClientApplication
 
     type User = {
         FirstName:string
