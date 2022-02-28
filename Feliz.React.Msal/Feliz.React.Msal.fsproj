@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageId>Feliz.React.Msal</PackageId>
+		<Title>Feliz.React.Msal</Title>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.1.0</Version>
+		<Authors>Rasheed Aboud</Authors>
+		<Company>ARMM Services</Company>
+		<Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
+		<Summary>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js).</Summary>
+		<PackageTags>feliz fsharp msal react fable safe</PackageTags>
+		<RepositoryUrl></RepositoryUrl>
+		<PackageProjectUrl></PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReleaseNotes>
+			Initial release
+		</PackageReleaseNotes>
+
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="Msal.fs" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Fable.Core" Version="3.6.2" />
+		<PackageReference Include="Feliz" Version="1.59.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="5.0.2" />
+	</ItemGroup>
+	<PropertyGroup>
+		<NpmDependencies>
+			<NpmPackage Name="@azure/msal-react @azure/msal-browser" Version="gte 1.3.0" ResolutionStrategy="Max" />
+		</NpmDependencies>
+	</PropertyGroup>
+</Project>
+
+
+
