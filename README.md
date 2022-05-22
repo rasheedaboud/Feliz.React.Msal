@@ -31,7 +31,7 @@ A wrapper around Microsofts MSAL library for react.
                   postLogoutRedirectUri = "https://localhost:8080/"};
             cache={cacheLocation="sessionStorage"; storeAuthStateInCookie=false}
           }
-        let msal:IPublicClientApplication = createClient msalConfig
+        let client:IPublicClientApplication = createClient msalConfig
         
         
     ```
