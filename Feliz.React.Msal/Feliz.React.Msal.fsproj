@@ -5,7 +5,7 @@
 		<PackageId>Feliz.React.Msal</PackageId>
 		<Title>Feliz.React.Msal</Title>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.1.11</Version>
+		<Version>0.1.12</Version>
 		<Authors>Rasheed Aboud</Authors>
 		<Company>ARMM Services</Company>
 		<Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
@@ -15,7 +15,7 @@
 		<PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReleaseNotes>
-			Updated to @azure/msal-react  version 1.4
+			Missing Fable Package Settings inside the fsproj.
 		</PackageReleaseNotes>
 
 	</PropertyGroup>

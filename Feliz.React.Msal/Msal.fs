@@ -162,7 +162,7 @@ module Requests =
     }
 
 
-
+[<AutoOpen>]
 module Msal = 
 
     open Account
@@ -264,7 +264,7 @@ module Msal =
     /// <param name="instance">PublicClientApplication.</param>
     type MsalProvider =
       static member inline instance (pca: obj) = "instance" ==> pca
-      static member inline children (children: ReactElement list) = "children" ==> children
+      static member inline children (children: seq<Fable.React.ReactElement>) = "children" ==> children
       static member inline create  props = Interop.reactApi.createElement (msalProvider, createObj !!props)
 
 
@@ -272,14 +272,14 @@ module Msal =
     /// <seealso cref="https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md"/>
     /// </summary>
     type AuthenticatedTemplate =
-      static member inline children (children: ReactElement list) = "children" ==> children
+      static member inline children (children: seq<Fable.React.ReactElement>) = "children" ==> children
       static member inline create props = Interop.reactApi.createElement (authenticatedTemplate, createObj !!props)
 
     /// <summary>Used to show UI when user is NOT authenticated
     /// <seealso cref="https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md"/>
     /// </summary>
     type UnauthenticatedTemplate  =
-      static member inline children (children: ReactElement list) = "children" ==> children
+      static member inline children (children: seq<Fable.React.ReactElement>) = "children" ==> children
       static member inline create props = Interop.reactApi.createElement (unauthenticatedTemplate, createObj !!props)
 
 
