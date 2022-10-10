@@ -5,7 +5,7 @@
 		<PackageId>Feliz.React.Msal</PackageId>
 		<Title>Feliz.React.Msal</Title>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.1.12</Version>
+		<Version>0.1.13</Version>
 		<Authors>Rasheed Aboud</Authors>
 		<Company>ARMM Services</Company>
 		<Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
