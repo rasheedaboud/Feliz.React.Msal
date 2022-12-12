@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{026677C5-B8F3-4874-A4B2-D844417D6B4C}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Feliz.React.Msal", "Feliz.React.Msal\Feliz.React.Msal.fsproj", "{48C558DC-F576-4CD8-9C0E-6880471F8F7A}"
 EndProject
 Global

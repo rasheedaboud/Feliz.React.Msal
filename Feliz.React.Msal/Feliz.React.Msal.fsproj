@@ -1,45 +1,35 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<PackageId>Feliz.React.Msal</PackageId>
-		<Title>Feliz.React.Msal</Title>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.1.13</Version>
-		<Authors>Rasheed Aboud</Authors>
-		<Company>ARMM Services</Company>
-		<Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
-		<Summary>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js).</Summary>
-		<PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
-		<RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReleaseNotes>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Feliz.React.Msal</PackageId>
+    <Title>Feliz.React.Msal</Title>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.13</Version>
+    <Authors>Rasheed Aboud</Authors>
+    <Company>ARMM Services</Company>
+    <Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
+    <Summary>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js).</Summary>
+    <PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
+    <RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>
 			Missing Fable Package Settings inside the fsproj.
 		</PackageReleaseNotes>
-
-	</PropertyGroup>
-	<ItemGroup>
-		<Compile Include="Msal.fs" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Fable.Core" Version="3.7.0" />
-		<PackageReference Include="Feliz" Version="1.62.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Update="FSharp.Core" Version="6.0.3" />
-	</ItemGroup>
-	<PropertyGroup>
-		<NpmDependencies>
-			<NpmPackage Name="@azure/msal-react @azure/msal-browser" Version="gte 1.4.17" ResolutionStrategy="Max" />
-		</NpmDependencies>
-	</PropertyGroup>
-	 <!-- Add source files to "fable" folder in Nuget package -->
-	<ItemGroup>
-	    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-	</ItemGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Msal.fs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <NpmDependencies>
+      <NpmPackage Name="@azure/msal-react @azure/msal-browser" Version="gte 1.4.17" ResolutionStrategy="Max" />
+    </NpmDependencies>
+  </PropertyGroup>
+  <!-- Add source files to "fable" folder in Nuget package -->
+  <ItemGroup>
+    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
-
-
-
