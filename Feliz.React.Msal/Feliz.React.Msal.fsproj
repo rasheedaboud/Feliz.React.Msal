@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0; net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Feliz.React.Msal</PackageId>
     <Title>Feliz.React.Msal</Title>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.13</Version>
+    <Version>0.2.0</Version>
     <Authors>Rasheed Aboud</Authors>
     <Company>ARMM Services</Company>
     <Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
@@ -14,12 +13,18 @@
     <PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
     <RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
     <PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>
-			Missing Fable Package Settings inside the fsproj.
+      Switch Package Manager from NuGet to Paket.
+      Build nuget package using Paket.
+      Add Fake build system.
+      Depend only on Fable.React.Types.
+      Add .NET 6.0 target framework.
+      Format code on build using Fantomas.
 		</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
+    <None Include="paket.template" />
     <Compile Include="Msal.fs" />
   </ItemGroup>
   <PropertyGroup>
@@ -27,9 +32,5 @@
       <NpmPackage Name="@azure/msal-react @azure/msal-browser" Version="gte 1.4.17" ResolutionStrategy="Max" />
     </NpmDependencies>
   </PropertyGroup>
-  <!-- Add source files to "fable" folder in Nuget package -->
-  <ItemGroup>
-    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

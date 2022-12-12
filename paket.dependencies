@@ -1,5 +1,21 @@
 source https://api.nuget.org/v3/index.json
+storage: none
+strategy: max
+frameworks: netstandard2.0, net6
 
-nuget Fable.Core 3.7.0
-nuget Feliz 1.62.0
-nuget FSharp.Core 6.0.3
+nuget Feliz prerelease
+nuget FSharp.Core
+
+group Tools
+    source https://api.nuget.org/v3/index.json
+    strategy: max
+    clitool femto
+    clitool fantomas-tool
+
+group Build
+    source https://api.nuget.org/v3/index.json
+    storage: none
+    strategy: max
+    nuget FSharp.Core
+    nuget Fake
+    nuget BlackFox.Fake.BuildTask
