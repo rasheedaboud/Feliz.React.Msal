@@ -6,16 +6,12 @@ frameworks: netstandard2.0, net6
 nuget Feliz prerelease
 nuget FSharp.Core
 
-group Tools
-    source https://api.nuget.org/v3/index.json
-    strategy: max
-    clitool femto
-    clitool fantomas-tool
-
 group Build
     source https://api.nuget.org/v3/index.json
     storage: none
     strategy: max
+
+    nuget Fake.DotNet.Cli
     nuget FSharp.Core
-    nuget Fake
+    nuget Fake alpha
     nuget BlackFox.Fake.BuildTask

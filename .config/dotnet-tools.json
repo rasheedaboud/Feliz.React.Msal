@@ -7,6 +7,24 @@
       "commands": [
         "paket"
       ]
+    },
+    "femto": {
+      "version": "0.16.0",
+      "commands": [
+        "femto"
+      ]
+    },
+    "fantomas-tool": {
+      "version": "4.7.9",
+      "commands": [
+        "fantomas"
+      ]
+    },
+    "fake-cli": {
+      "version": "5.23.1",
+      "commands": [
+        "fake"
+      ]
     }
   }
 }
