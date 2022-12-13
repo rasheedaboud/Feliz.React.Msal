@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0; net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <PackageId>Feliz.React.Msal</PackageId>
     <Title>Feliz.React.Msal</Title>
     <Version>0.2.0</Version>
@@ -21,6 +23,10 @@
       Add .NET 6.0 target framework.
       Format code on build using Fantomas.
 		</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
   <ItemGroup>
     <None Include="paket.references" />
@@ -29,7 +35,8 @@
   </ItemGroup>
   <PropertyGroup>
     <NpmDependencies>
-      <NpmPackage Name="@azure/msal-react @azure/msal-browser" Version="gte 1.4.17" ResolutionStrategy="Max" />
+      <NpmPackage Name="@azure/msal-browser" Version="gte 2.32.1" ResolutionStrategy="Max"/>
+      <NpmPackage Name="@azure/msal-react" Version="gte 1.5.1" ResolutionStrategy="Max" />
     </NpmDependencies>
   </PropertyGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

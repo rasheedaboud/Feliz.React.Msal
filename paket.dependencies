@@ -5,13 +5,19 @@ frameworks: netstandard2.0, net6
 
 nuget Feliz prerelease
 nuget FSharp.Core
+nuget Microsoft.SourceLink.GitHub content: false, copy_local: false, import_targets: false
 
 group Build
     source https://api.nuget.org/v3/index.json
     storage: none
     strategy: max
+    frameworks: netstandard2.0, net6
 
-    nuget Fake.DotNet.Cli
+    nuget Microsoft.Build 17.3.2
+    nuget Fake.DotNet.Cli alpha
+    nuget Fake.IO.FileSystem alpha
+    nuget Fake.Core.CommandLineParsing alpha
+    nuget Fake.Core.ReleaseNotes alpha
+    nuget Fake.Core.DependencyManager.Paket alpha
     nuget FSharp.Core
-    nuget Fake alpha
     nuget BlackFox.Fake.BuildTask

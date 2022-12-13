@@ -8,7 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{026677
 		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Feliz.React.Msal", "Feliz.React.Msal\Feliz.React.Msal.fsproj", "{48C558DC-F576-4CD8-9C0E-6880471F8F7A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Feliz.React.Msal", "Feliz.React.Msal\Feliz.React.Msal.fsproj", "{48C558DC-F576-4CD8-9C0E-6880471F8F7A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Build", "Build\Build.fsproj", "{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{48C558DC-F576-4CD8-9C0E-6880471F8F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48C558DC-F576-4CD8-9C0E-6880471F8F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48C558DC-F576-4CD8-9C0E-6880471F8F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
