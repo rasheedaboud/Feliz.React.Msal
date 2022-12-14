@@ -14,10 +14,12 @@ group Build
     frameworks: netstandard2.0, net6
 
     nuget Microsoft.Build 17.3.2
-    nuget Fake.DotNet.Cli alpha
-    nuget Fake.IO.FileSystem alpha
-    nuget Fake.Core.CommandLineParsing alpha
-    nuget Fake.Core.ReleaseNotes alpha
-    nuget Fake.Core.DependencyManager.Paket alpha
+    nuget Microsoft.Build.Framework 17.3.2
+    nuget Fake.DotNet.Cli
+    nuget Fake.DotNet.MSBuild
+    nuget Fake.IO.FileSystem
+    nuget Fake.Core.CommandLineParsing
+    nuget Fake.Core.ReleaseNotes
+    nuget Fake.Core.DependencyManager.Paket
     nuget FSharp.Core
     nuget BlackFox.Fake.BuildTask
