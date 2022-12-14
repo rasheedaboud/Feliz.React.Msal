@@ -8,17 +8,18 @@ open BlackFox.Fake
 let mutable dotNetOptions = fun _ -> DotNet.Options.Create()
 
 let slnDir = Path.getFullName "../"
-let projDir =  slnDir @@ "Feliz.React.Msal"
+let projName = "Feliz.React.Msal"
+let projDir =  slnDir @@ projName
 let paketLockFile = slnDir @@ "paket.lock"
 
-let installDeps = BuildTask.create "InstallDependencies" [] {
-    let printRes (operation : string) (res : ProcessResult) =
-        match res with
-        | res when res.ExitCode = 0 -> ()
-        | res ->
-            let concat = String.concat "; "
-            failwith $"{operation} failed: {System.Environment.NewLine}{res.Errors |> concat}{System.Environment.NewLine}"
+let printRes (operation : string) (res : ProcessResult) =
+    match res with
+    | res when res.ExitCode = 0 -> ()
+    | res ->
+        let concat = String.concat "; "
+        failwith $"{operation} failed: {System.Environment.NewLine}{res.Errors |> concat}{System.Environment.NewLine}"
 
+let installDeps = BuildTask.create "InstallDependencies" [] {
     dotNetOptions <- DotNet.install (fun opts ->
         { opts with
             Channel = DotNet.CliChannel.LTS})
@@ -44,12 +45,30 @@ let clean = BuildTask.create "Clean" [] {
     |> Seq.iter (Shell.rm)
 }
 
-let build = BuildTask.create "Build" [installDeps.IfNeeded; clean.IfNeeded] {
-    !! "src/**/*.*proj"
-    |> Seq.iter (DotNet.build id)
+let build config =
+    !! (projDir @@ $"{projName}.fsproj")
+    |> string
+    |> DotNet.build (fun opts ->
+        { opts with
+            Configuration = config
+        }
+    )
+
+let buildDebug = BuildTask.create "BuildDebug" [installDeps.IfNeeded; clean.IfNeeded] {
+    build DotNet.Debug
 }
 
-let _all = BuildTask.createEmpty "All" [clean; build]
+let buildRelease = BuildTask.create "BuildRelease" [installDeps.IfNeeded; clean.IfNeeded] {
+    build DotNet.Release
+}
+
+let pack = BuildTask.create "Pack" [buildRelease] {
+    DotNet.exec id "paket" $"pack --symbols {projDir}" |> printRes "Pack"
+}
+
+let _all = BuildTask.createEmpty "All" [installDeps; clean; pack]
+
+let defaultBuild = BuildTask.createEmpty "Build" [buildDebug]
 
 [<EntryPoint>]
 let main args =
