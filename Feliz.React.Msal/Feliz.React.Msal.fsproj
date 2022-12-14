@@ -19,9 +19,8 @@
       Switch Package Manager from NuGet to Paket.
       Build nuget package using Paket.
       Add Fake build system.
-      Depend only on Fable.React.Types.
-      Add .NET 6.0 target framework.
-      Format code on build using Fantomas.
+      Depend only on Feliz version 2 or greater to fix compatibility issues with newer Fable versions.
+      Add .NET 6.0 as a target framework.
 		</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
