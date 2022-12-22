@@ -5,11 +5,10 @@ open System
 open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop
-open Fable.React
 open Feliz
 
 [<AutoOpen>]
-module Config = 
+module Config =
     type Auth = {
         clientId:string
         authority:string
@@ -18,18 +17,16 @@ module Config =
         postLogoutRedirectUri:string
     }
     type Cache = {
-        cacheLocation:string; 
+        cacheLocation:string;
         storeAuthStateInCookie:bool
     }
 
-    /// //////////////////////////////////////
     type MsalConfig ={
         auth:Auth;
         cache:Cache}
 
-module Account = 
+module Account =
 
-    
     type IIdTokenClaims =
         abstract member aud: string with get, set
         abstract member auth_time: string with get, set
@@ -54,7 +51,7 @@ module Account =
         name: string;
         IIdTokenClaims: IIdTokenClaims option;
     }
-      with 
+      with
         static member Default() = {
             homeAccountId=""
             environment=""
@@ -65,14 +62,13 @@ module Account =
             IIdTokenClaims=None
         }
 
-    type AccountIdentifiers = 
+    type AccountIdentifiers =
       | [<CompiledName("localAccount")>]LocalAccount of string
       | [<CompiledName("homeAccount")>]HomeAccount of string
       | [<CompiledName("username")>]Username of string
 
-
 [<RequireQualifiedAccess>]
-module Requests = 
+module Requests =
 
     open Account
 
@@ -119,51 +115,49 @@ module Requests =
     }
 
     type  PopupRequest = {
-        scopes: string[] option              
-        authority:string option               
-        correlationId:Guid option              
-        redirectUri:string option             
-        extraScopesToConsent: string[] option       
-        state:string option                     
-        prompt: PopUpRequestPrompt                    
-        loginHint:string option                  
-        sid:string option                        
-        domainHint:string option                 
-        extraQueryParameters: Dictionary<string,string> option;       
-        tokenQueryParameters: Dictionary<string,string> option;       
-        claims:string option                     
-        nonce:string option                       
-        popupWindowAttributes:PopupWindowAttributes option     
+        scopes: string[] option
+        authority:string option
+        correlationId:Guid option
+        redirectUri:string option
+        extraScopesToConsent: string[] option
+        state:string option
+        prompt: PopUpRequestPrompt
+        loginHint:string option
+        sid:string option
+        domainHint:string option
+        extraQueryParameters: Dictionary<string,string> option;
+        tokenQueryParameters: Dictionary<string,string> option;
+        claims:string option
+        nonce:string option
+        popupWindowAttributes:PopupWindowAttributes option
     }
         with static member Default = {
-                scopes= Some [||]              
-                authority=Some ""               
-                correlationId=Some Guid.Empty              
-                redirectUri=Some ""             
-                extraScopesToConsent= Some [||]       
-                state=Some ""                     
-                prompt= PopUpRequestPrompt.Login                    
-                loginHint=Some ""                  
-                sid=Some ""                        
-                domainHint=Some ""                 
-                extraQueryParameters= None ;       
-                tokenQueryParameters= None;       
-                claims=Some ""                     
-                nonce=Some ""                       
-                popupWindowAttributes= None     
+                scopes= Some [||]
+                authority=Some ""
+                correlationId=Some Guid.Empty
+                redirectUri=Some ""
+                extraScopesToConsent= Some [||]
+                state=Some ""
+                prompt= PopUpRequestPrompt.Login
+                loginHint=Some ""
+                sid=Some ""
+                domainHint=Some ""
+                extraQueryParameters= None ;
+                tokenQueryParameters= None;
+                claims=Some ""
+                nonce=Some ""
+                popupWindowAttributes= None
             }
-
 
     type RedirectRequest = {
         authority:string option
         account: AccountInfo option
-        redirectUri: string option  
+        redirectUri: string option
         postLogoutRedirectUri: string option
     }
 
-
 [<AutoOpen>]
-module Msal = 
+module Msal =
 
     open Account
 
@@ -204,8 +198,6 @@ module Msal =
         msGraphHost: string;
     }
 
-    
-
     type AuthError = {
         errorCode: string;
         errorMessage: string;
@@ -213,12 +205,12 @@ module Msal =
         correlationId: string;
     }
 
-    type IPublicClientApplication = 
+    type IPublicClientApplication =
         abstract member loginRedirect: request:Requests.RedirectRequest -> unit;
         abstract member loginPopup: request:Requests.PopupRequest -> Promise<Result<AuthenticationResult,AuthError>>
         abstract member logout: unit-> unit
         abstract member logoutRedirect: request:Requests.RedirectRequest -> Promise<unit>
-        abstract member getAllAccounts: unit-> AccountInfo[] 
+        abstract member getAllAccounts: unit-> AccountInfo[]
         abstract member acquireTokenSilent: request:Requests.SilentRequest -> Promise<AuthenticationResult option>;
         abstract member getAccountByUsername:userName: string -> AccountInfo option
         abstract member setActiveAccount:account: AccountInfo option -> unit
@@ -227,7 +219,7 @@ module Msal =
     [<Import("PublicClientApplication", from="@azure/msal-browser")>]
     type PublicClientApplication (config:MsalConfig) =
         interface IPublicClientApplication with
-            member _.loginRedirect(request:Requests.RedirectRequest) = jsNative  
+            member _.loginRedirect(request:Requests.RedirectRequest) = jsNative
             member _.loginPopup(request:Requests.PopupRequest) = jsNative
             member _.logout() = jsNative
             member _.logoutRedirect(request:Requests.RedirectRequest) = jsNative
@@ -236,8 +228,6 @@ module Msal =
             member _.getAccountByUsername(userName:string) = jsNative
             member _.setActiveAccount(account: AccountInfo option) = jsNative
             member _.getActiveAccount():AccountInfo option = jsNative
-
-
 
     type [<StringEnum>] [<RequireQualifiedAccess>] InteractionStatus =
         /// Initial status before interaction occurs
@@ -255,18 +245,15 @@ module Msal =
         /// Status set when interaction is complete
         | None
 
-
-    /// <summary>All components underneath MsalProvider will have access to the PublicClientApplication instance via 
+    /// <summary>All components underneath MsalProvider will have access to the PublicClientApplication instance via
     /// context as well as all hooks and components provided by @azure/msal-react.
-    /// for more info see 
+    /// for more info see
     /// <seealso cref="https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md"/>
     /// </summary>
-    /// <param name="instance">PublicClientApplication.</param>
     type MsalProvider =
       static member inline instance (pca: obj) = "instance" ==> pca
       static member inline children (children: seq<Fable.React.ReactElement>) = "children" ==> children
-      static member inline create  props = Interop.reactApi.createElement (msalProvider, createObj !!props)
-
+      static member inline create props = Interop.reactApi.createElement (msalProvider, createObj !!props)
 
     /// <summary>Used to show UI when user is authenticated
     /// <seealso cref="https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md"/>
@@ -281,7 +268,6 @@ module Msal =
     type UnauthenticatedTemplate  =
       static member inline children (children: seq<Fable.React.ReactElement>) = "children" ==> children
       static member inline create props = Interop.reactApi.createElement (unauthenticatedTemplate, createObj !!props)
-
 
     ///Send request to server to reset user password.
     let forgotPasswordRequest(config:MsalConfig):Requests.RedirectRequest = {
@@ -298,10 +284,8 @@ module Msal =
         redirectUri=Some config.auth.redirectUri
     }
 
-
     let forgotPassword (error:string) =
       error.Contains("AADB2C90118")
-
 
     let createClient config = new PublicClientApplication(config:MsalConfig) :> IPublicClientApplication
 
@@ -312,7 +296,7 @@ module Msal =
         Email:string
         AccountInfo:AccountInfo
     }
-    with 
+    with
         member this.IsAdmin =
             true
         static member Default = {
@@ -323,7 +307,7 @@ module Msal =
             AccountInfo = AccountInfo.Default()
         }
 
-    let CreateUser(account:AccountInfo option):User = 
+    let CreateUser(account:AccountInfo option):User =
         match account with
         | Some account ->
             match account.IIdTokenClaims with
@@ -339,13 +323,12 @@ module Msal =
         | _ -> User.Default
 
     ///Use this to request token from auth server
-    let tokenRequest account scopes :Requests.SilentRequest=    
+    let tokenRequest account scopes :Requests.SilentRequest=
         {   Requests.SilentRequest.Default with
-                account= Some account                        
+                account= Some account
                 scopes= Some scopes
                 forceRefresh=false
         }
-
 
     let redirectRequest msalConfig redirectUri :Requests.RedirectRequest= {
       account = None
@@ -354,16 +337,15 @@ module Msal =
       redirectUri = Some msalConfig.auth.redirectUri
     }
 
-    let popupRequest msalConfig = 
+    let popupRequest msalConfig =
         {
             Requests.PopupRequest.Default with
                 authority =Some msalConfig.auth.authority
                 redirectUri = Some msalConfig.auth.redirectUri
         }
 
+module Hooks =
 
-module Hooks = 
-    
     open Account
     open Msal
 
@@ -372,8 +354,8 @@ module Hooks =
         homeAccountId: string option
         username: string option }
 
-    ///The useIsAuthenticated hook returns a boolean indicating whether or not an account is signed in. 
-    /// It optionally accepts an accountIdentifier object you can provide if you need to know whether or not 
+    ///The useIsAuthenticated hook returns a boolean indicating whether or not an account is signed in.
+    /// It optionally accepts an accountIdentifier object you can provide if you need to know whether or not
     /// a specific account is signed in.
     let useIsAuthenticated(accountIdentifier:AccountIdentifier option) : bool= import "useIsAuthenticated" "@azure/msal-react"
 
@@ -382,12 +364,11 @@ module Hooks =
         abstract member inProgress: InteractionStatus;
         abstract member accounts: AccountInfo[];
 
-    ///The useAccount hook accepts an accountIdentifier parameter and returns the AccountInfo object for 
-    /// that account if it is signed in or null if it is not. You can read more about the AccountInfo object 
+    ///The useAccount hook accepts an accountIdentifier parameter and returns the AccountInfo object for
+    /// that account if it is signed in or null if it is not. You can read more about the AccountInfo object
     /// returned in the @azure/msal-browser docs here.
     /// https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/login-user.md#account-apis
     let useMsal(): IMsalContext= import "useMsal " "@azure/msal-react"
-
 
     type [<StringEnum>] [<RequireQualifiedAccess>] InteractionType =
         | Redirect
@@ -404,10 +385,8 @@ module Hooks =
                               authenticationRequest:AuthenticationRequest option,
                               accountIdentifier:AccountIdentifier option) = import "useMsalAuthentication " "@azure/msal-react"
 
-    ///The useAccount hook accepts an accountIdentifier parameter and returns the AccountInfo object for 
-    /// that account if it is signed in or null if it is not. You can read more about the AccountInfo object 
+    ///The useAccount hook accepts an accountIdentifier parameter and returns the AccountInfo object for
+    /// that account if it is signed in or null if it is not. You can read more about the AccountInfo object
     /// returned in the @azure/msal-browser docs here.
     /// https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/login-user.md#account-apis
     let useAccount (identifier:AccountIdentifiers) : AccountInfo= import "useAccount " "@azure/msal-react"
-
-
