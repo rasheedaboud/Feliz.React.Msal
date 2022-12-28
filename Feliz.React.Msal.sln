@@ -10,7 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{026677
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Feliz.React.Msal", "Feliz.React.Msal\Feliz.React.Msal.fsproj", "{48C558DC-F576-4CD8-9C0E-6880471F8F7A}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Build", "Build\Build.fsproj", "{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Build", "Build\Build.fsproj", "{6C98DC09-D2DE-45FF-98D4-5ABF3A14BACC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32662AAB-1E2C-4DDC-B1F9-F18BBBF63F12}"
+	ProjectSection(SolutionItems) = preProject
+		package-lock.json = package-lock.json
+		package.json = package.json
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
