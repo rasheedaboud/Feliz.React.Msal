@@ -3,7 +3,10 @@ storage: none
 strategy: max
 frameworks: netstandard2.0, net6
 
-nuget Feliz prerelease
+nuget Feliz ~> 1.68
+nuget Fable.Core ~> 3
+nuget Fable.AST ~> 3
+nuget Fable.React ~> 8
 nuget FSharp.Core
 nuget Microsoft.SourceLink.GitHub content: false, copy_local: false, import_targets: false
 
