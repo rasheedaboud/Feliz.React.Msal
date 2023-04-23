@@ -1,6 +1,7 @@
 # Feliz.React.Msal
 
-A wrapper around Microsofts MSAL library for react.
+A wrapper around Microsofts MSAL library for react. This package can be used with Azure AD OR Azure B2C, simply change config object to refelct right endpoints.
+[Here](https://github.com/rasheedaboud/Feliz.Auth.Examples/blob/master/README.md) is a minimal repo showinf step by step how to get started using Feliz minimal template. It does assume you register you application in AD or B2C in advance.
 
 #### Getting Started 
 
@@ -52,24 +53,45 @@ A wrapper around Microsofts MSAL library for react.
     
 #### Protecting sections of site
 
-Use Authenticated/Unauthenticated template to show or hide sections of ui
+Use ``Authenticated/Unauthenticated`` template to show or hide sections of UI. Alternatively  use ``useIsAuthenticated()`` hook if use ``if XXX then xxx else `` block to show or hide UI.
 
+```fs
+      AuthenticatedTemplate.create [
+          AuthenticatedTemplate.children [
+          ]
+      ]
 
-    
-          AuthenticatedTemplate.create [
-              AuthenticatedTemplate.children [
-              ]
+      UnauthenticatedTemplate.create [
+          UnauthenticatedTemplate.children [
           ]
-    
-          UnauthenticatedTemplate.create [
-              UnauthenticatedTemplate.children [
-              ]
-          ]
+      ]
           
+```
 
 
-Or use useIsAuthenticated() hook.
 
+If you are using Elmish you will need to use the ``useEffect()`` react hook in conjuction with ``useIsAuthenticated()`` or ``useMsal()`` hooks to verify user is logged in and dispatch an event.
+
+```fs
+[<ReactComponent>]
+let Component () =
+
+    let client = useMsal()
+
+    let isAuthenticated = useIsAuthenticated(None)
+
+    //Dispatch you event here
+    let someEffect() = async {
+        if isAuthenticated then
+            let account = client.accounts[0]
+            setUser  Some account |> dispatch
+        else 
+            setUser  None |> dispatch
+    }
+
+    //Re runs effect isAuthenticated changes
+    React.useEffect(login >> Async.StartImmediate, [| box isAuthenticated |])
+```
 
 #### Hooks 
 
