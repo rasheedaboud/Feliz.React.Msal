@@ -90,7 +90,7 @@ let Component () =
     }
 
     //Re runs effect isAuthenticated changes
-    React.useEffect(login >> Async.StartImmediate, [| box isAuthenticated |])
+    React.useEffect(someEffect >> Async.StartImmediate, [| box isAuthenticated |])
 ```
 
 #### Hooks 
