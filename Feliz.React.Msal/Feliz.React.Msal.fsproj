@@ -1,42 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0; net6.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Deterministic>true</Deterministic>
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    <PackageId>Feliz.React.Msal</PackageId>
-    <Title>Feliz.React.Msal</Title>
-    <Version>0.2.0</Version>
-    <Authors>Rasheed Aboud</Authors>
-    <Company>ARMM Services</Company>
-    <Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
-    <Summary>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js).</Summary>
-    <PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
-    <RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
-    <PackageReleaseNotes>
-      Switch Package Manager from NuGet to Paket.
-      Build nuget package using Paket.
-      Add Fake build system.
-      Depend only on Feliz version 2 or greater to fix compatibility issues with newer Fable versions.
-      Add .NET 6.0 as a target framework.
+	<PropertyGroup>
+		<TargetFrameworks>net7.0</TargetFrameworks>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Deterministic>true</Deterministic>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<PackageId>Feliz.React.Msal</PackageId>
+		<Title>Feliz.React.Msal</Title>
+		<Version>0.2.4</Version>
+		<Authors>Rasheed Aboud</Authors>
+		<Company>ARMM Services</Company>
+		<Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
+		<Summary>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js).</Summary>
+		<PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
+		<RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
+		<PackageReleaseNotes>
+			Switch Package Manager from NuGet to Paket.
+			Build nuget package using Paket.
+			Add Fake build system.
+			Depend only on Feliz version 2 or greater to fix compatibility issues with newer Fable versions.
+			Add .NET 6.0 as a target framework.
 		</PackageReleaseNotes>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="paket.references" />
-    <None Include="paket.template" />
-    <Compile Include="Msal.fs" />
-  </ItemGroup>
-  <PropertyGroup>
-    <NpmDependencies>
-      <NpmPackage Name="@azure/msal-browser" Version="gte 2.32.1" ResolutionStrategy="Max"/>
-      <NpmPackage Name="@azure/msal-react" Version="gte 1.5.1" ResolutionStrategy="Max" />
-    </NpmDependencies>
-  </PropertyGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="paket.references" />
+		<None Include="paket.template" />
+		<Compile Include="Msal.fs" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FSharp.Core" Version="7.0.0" />
+		<PackageReference Include="Fable.ReactDom.Types" Version="18.2.0" />
+		<PackageReference Include="Feliz" Version="2.6.0" />
+	</ItemGroup>
+	<PropertyGroup>
+		<NpmDependencies>
+			<NpmPackage Name="@azure/msal-browser" Version="gte 2.32.1" ResolutionStrategy="Max" />
+			<NpmPackage Name="@azure/msal-react" Version="gte 1.5.1" ResolutionStrategy="Max" />
+		</NpmDependencies>
+	</PropertyGroup>
+	<Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
