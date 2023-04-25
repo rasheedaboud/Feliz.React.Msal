@@ -1,6 +1,0 @@
-﻿type project
-licenseExpression MIT
-files
-    *.fsproj ==> fable/
-    **/*.fs ==> fable/
-    **/*.fsi ==> fable/
